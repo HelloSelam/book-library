@@ -1,42 +1,38 @@
+import { useState, useEffect } from "react"
 import BookList from "./components/BookList"
+import SearchBar from "./components/SearchBar"
 
 function App() {
-  const sampleBooks = [
-    {
-      cover: "https://covers.openlibrary.org/b/id/10523353-L.jpg",
-      title: "The Great Gatsby",
-      author: "F. Scott Fitzgerald",
-      publisher: "Charles Scribner's Sons",
-    },
-    {
-      cover: "https://covers.openlibrary.org/b/id/240727-L.jpg",
-      title: "Pride and Prejudice",
-      author: "Jane Austen",
-      publisher: "T. Egerton",
-    },
-    {
-      cover: "https://covers.openlibrary.org/b/id/8231856-L.jpg",
-      title: "1984",
-      author: "George Orwell",
-      publisher: "Secker & Warburg",
-    },
-  ]
+  const [books, setBooks] = useState([])
+
+  const fetchBooks = async (searchTerm) => {
+    try {
+      const response = await fetch(
+        `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&maxResults=12`
+      )
+      const data = await response.json()
+      const booksData = data.items?.map((item) => ({
+        title: item.volumeInfo.title,
+        author: item.volumeInfo.authors ? item.volumeInfo.authors[0] : "Unknown Author",
+        publisher: item.volumeInfo.publisher || "Unknown Publisher",
+        cover: item.volumeInfo.imageLinks?.thumbnail || null,
+      })) || []
+      setBooks(booksData)
+    } catch (error) {
+      console.error("Error fetching books:", error)
+    }
+  }
+
+  // Fetch default books on load
+  useEffect(() => {
+    fetchBooks("harry potter")
+  }, [])
 
   return (
-    <>
-      <main className="container-page py-6">
-        {/* Header reflects the clean, roomy style from your design */}
-        <header className="mb-6">
-          <h1 className="text-2xl font-bold">Book Library</h1>
-          <p className="text-gray-600">Search and explore books from Open Library.</p>
-        </header>
-
-        <div className="min-h-screen bg-gray-100 p-6">
-          <BookList books={sampleBooks} />
-        </div>
-
-      </main>
-    </>
+    <div className="min-h-screen bg-gray-100 p-6">
+      <SearchBar onSearch={fetchBooks} />
+      <BookList books={books} />
+    </div>
   )
 }
 
