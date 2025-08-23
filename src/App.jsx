@@ -2,11 +2,13 @@
 import { useState, useEffect } from "react"
 import BookList from "./components/BookList"
 import SearchBar from "./components/SearchBar"
+import BookModal from "./components/BookModal"
 
 function App() {
   const [books, setBooks] = useState([])         // Stores fetched books
   const [loading, setLoading] = useState(false)  // Loading state
   const [error, setError] = useState(null)       // Error state
+  const [selectedBook, setSelectedBook] = useState(null) // Modal state
 
   const fetchBooks = async (searchTerm) => {
     setLoading(true)
@@ -29,6 +31,9 @@ function App() {
             author: item.volumeInfo.authors ? item.volumeInfo.authors[0] : "Unknown Author",
             publisher: item.volumeInfo.publisher || "Unknown Publisher",
             cover: item.volumeInfo.imageLinks?.thumbnail || null,
+            publishedDate: item.volumeInfo.publishedDate || "",
+            pageCount: item.volumeInfo.pageCount || "",
+            description: item.volumeInfo.description || "",
         })) || []
 
       setBooks(booksData)
@@ -56,7 +61,14 @@ function App() {
       {error && <p className="text-center text-red-500 mt-4">{error}</p>}
 
       {/* BookList displays books */}
-      {!loading && !error && <BookList books={books} />}
+      {!loading && !error && (
+        <BookList books={books} onBookClick={setSelectedBook} />
+      )}
+      
+      {/* BookModal for selected book */}
+      {selectedBook && (
+        <BookModal book={selectedBook} onClose={() => setSelectedBook(null)} />
+      )}
     </div>
   )
 }

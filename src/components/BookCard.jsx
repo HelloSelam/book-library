@@ -1,5 +1,5 @@
 // src/components/BookCard.jsx
-function BookCard({ book }) {
+function BookCard({ book, onClick }) {
   const placeholder = "https://via.placeholder.com/150x220?text=No+Cover"
   const cover = book?.cover || placeholder
   const title = book?.title || "No Title Available"
@@ -7,7 +7,10 @@ function BookCard({ book }) {
   const publisher = book?.publisher || "Unknown Publisher"
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-4 flex flex-col items-center hover:shadow-lg transition-shadow duration-300">
+    <div
+      onClick={onClick}
+      className="bg-white rounded-2xl shadow-md p-4 flex flex-col items-center hover:shadow-lg transition-shadow duration-300"
+    >
       <img
         src={cover}
         alt={title}
