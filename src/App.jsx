@@ -1,14 +1,18 @@
 // src/App.jsx
-import { useState, useEffect } from "react"
+import { Routes, Route, useLocation } from "react-router-dom"
 import BookList from "./components/BookList"
 import SearchBar from "./components/SearchBar"
 import BookModal from "./components/BookModal"
+import LandingPage from "./pages/LandingPage"
+import { useState, useEffect } from "react"
 
 function App() {
+  const location = useLocation() 
   const [books, setBooks] = useState([])         // Stores fetched books
   const [loading, setLoading] = useState(false)  // Loading state
   const [error, setError] = useState(null)       // Error state
   const [selectedBook, setSelectedBook] = useState(null) // Modal state
+  const [searchTerm, setSearchTerm] = useState(location.state?.searchTerm || "") 
 
   const fetchBooks = async (searchTerm) => {
     setLoading(true)
@@ -27,6 +31,7 @@ function App() {
       const data = await response.json()
       const booksData =
         data.items?.map((item) => ({
+            id: item.id,
             title: item.volumeInfo.title || "No Title Available",
             author: item.volumeInfo.authors ? item.volumeInfo.authors[0] : "Unknown Author",
             publisher: item.volumeInfo.publisher || "Unknown Publisher",
@@ -48,28 +53,35 @@ function App() {
 
   // Fetch default books on load
   useEffect(() => {
-    fetchBooks("harry potter")
-  }, [])
+    if (searchTerm) fetchBooks(searchTerm)
+  }, [searchTerm])
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      {/* SearchBar triggers fetchBooks */}
-      <SearchBar onSearch={fetchBooks} />
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
 
-      {/* Loading and error messages */}
-      {loading && <p className="text-center mt-4">Loading books...</p>}
-      {error && <p className="text-center text-red-500 mt-4">{error}</p>}
-
-      {/* BookList displays books */}
-      {!loading && !error && (
-        <BookList books={books} onBookClick={setSelectedBook} />
-      )}
-      
-      {/* BookModal for selected book */}
-      {selectedBook && (
-        <BookModal book={selectedBook} onClose={() => setSelectedBook(null)} />
-      )}
-    </div>
+      <Route
+        path="/browse"
+        element={
+          <div className="min-h-screen bg-gray-100 p-6">
+            <SearchBar
+              onSearch={(term) => {
+                setSearchTerm(term)
+                fetchBooks(term)
+              }}
+            />
+            {loading && <p className="text-center mt-4">Loading books...</p>}
+            {error && <p className="text-center text-red-500 mt-4">{error}</p>}
+            {!loading && !error && (
+              <BookList books={books} onBookClick={setSelectedBook} />
+            )}
+            {selectedBook && (
+              <BookModal book={selectedBook} onClose={() => setSelectedBook(null)} />
+            )}
+          </div>
+        }
+      />
+    </Routes>
   )
 }
 
