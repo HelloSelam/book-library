@@ -1,7 +1,7 @@
-import Header from "./Header";
-import Hero from "./Hero";
-import Categories from "./Categories";
-import WhyChooseNovare from "./WhyChooseNovare";
+import Header from "../components/Header";
+import Hero from "../components/Hero";
+import Categories from "../components/Categories";
+import WhyChooseNovare from "../components/WhyChooseNovare";
 
 const LandingPage = () => {
   return (
