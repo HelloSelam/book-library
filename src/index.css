@@ -22,3 +22,12 @@
   .card-title { @apply text-base font-semibold leading-snug line-clamp-2; }
   .card-subtle { @apply text-sm text-gray-600; }
 } 
+
+/* Hide scrollbar but keep scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE + Edge */
+  scrollbar-width: none;     /* Firefox */
+}

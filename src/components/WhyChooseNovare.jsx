@@ -20,10 +20,10 @@ const benefits = [
 
 const WhyChooseNovare = () => {
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-6 text-center">
+    <section className="py-16 bg-purple-300">
+      <div className="container mx-auto px-20 text-center">
         <h2 className="text-3xl font-bold mb-4">Why Choose Novare?</h2>
-        <p className="text-gray-600 mb-12">
+        <p className="text-gray-600 font-semibold mb-12">
           Everything you need to renew your reading experience
         </p>
 

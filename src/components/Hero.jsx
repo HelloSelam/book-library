@@ -1,27 +1,41 @@
 import React from "react";
+import booksImage from "../assets/cover_image.jpg"; // use your new cover image
 
 const Hero = () => {
   return (
-    <section
-      className="relative bg-cover bg-center h-[80vh] flex items-center justify-center text-center text-white"
-      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1512820790803-83ca734da794')" }}
-    >
-      <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+    <section className="bg-purple-300 px-4 md:px-20 pt-20"> 
+      {/* ⬆ Changed mt-8 → pt-32 for enough space below fixed header */}
 
-      <div className="relative z-10 max-w-2xl">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">
-          Innovate Your Book Shelf
-        </h1>
-        <p className="text-lg md:text-xl mb-6">
-          Welcome to your personal digital library. Discover, organize & enjoy
-          thousands of books across every genre imaginable.
-        </p>
-        <a
-          href="#categories"
-          className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg"
-        >
-          Start Exploring
-        </a>
+      {/* Hero Card */}
+      <div className="bg-white rounded-3xl shadow-2xl flex flex-col md:flex-row items-center justify-between px-8 md:px-16 py-12">
+        
+        {/* Left Side */}
+        <div className="max-w-xl text-center md:text-left">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-snug">
+            Innovate Your Book Shelf
+          </h1>
+          <p className="mt-4 text-lg text-gray-700">
+            Welcome to your personal digital library. Discover, organize & enjoy
+            thousands of books across every genre imaginable.
+          </p>
+          <div className="mt-8">
+            <a
+              href="#categories"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg"
+            >
+              Start Exploring
+            </a>
+          </div>
+        </div>
+
+        {/* Right Side */}
+        <div className="mt-10 md:mt-0">
+          <img
+            src={booksImage}
+            alt="Bookshelf"
+            className="w-[350px] md:w-[450px] h-auto rounded-2xl"
+          />
+        </div>
       </div>
     </section>
   );

@@ -2,16 +2,22 @@
 import { Routes, Route } from "react-router-dom"
 import LandingPage from "./pages/LandingPage"
 import BrowsePage from "./pages/BrowsePage"
+import Header from "./components/Header"
 
 function App() {
   return (
-    <Routes>
-      {/* Landing Page */}
-      <Route path="/" element={<LandingPage />} />
+    <>
+      {/* Global Header always visible */}
+      <Header />
 
-      {/* Browse Page */}
-      <Route path="/browse" element={<BrowsePage />} />
-    </Routes>
+      <Routes>
+        {/* Landing Page */}
+        <Route path="/" element={<LandingPage />} />
+
+        {/* Browse Page */}
+        <Route path="/browse" element={<BrowsePage />} />
+      </Routes>
+    </>
   )
 }
 
