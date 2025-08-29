@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom"
 import LandingPage from "./pages/LandingPage"
 import BrowsePage from "./pages/BrowsePage"
 import Header from "./components/Header"
+import MyLibrary from "./pages/MyLibrary"
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
 
         {/* Browse Page */}
         <Route path="/browse" element={<BrowsePage />} />
+
+        {/* My Library Page */}
+        <Route path="/mylibrary" element={<MyLibrary />} />
       </Routes>
     </>
   )

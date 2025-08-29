@@ -1,11 +1,10 @@
 import React from "react";
-import booksImage from "../assets/cover_image.jpg"; // use your new cover image
+import { Link } from "react-router-dom"; // ✅ Import Link
+import booksImage from "../assets/cover_image.jpg";
 
 const Hero = () => {
   return (
-    <section className="bg-purple-300 px-4 md:px-20 pt-20"> 
-      {/* ⬆ Changed mt-8 → pt-32 for enough space below fixed header */}
-
+    <section className="bg-purple-300 px-4 md:px-20 pt-20">
       {/* Hero Card */}
       <div className="bg-white rounded-3xl shadow-2xl flex flex-col md:flex-row items-center justify-between px-8 md:px-16 py-12">
         
@@ -19,12 +18,12 @@ const Hero = () => {
             thousands of books across every genre imaginable.
           </p>
           <div className="mt-8">
-            <a
-              href="#categories"
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg"
+            <Link
+              to="/browse"   // ✅ Navigate to browse page
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-colors"
             >
               Start Exploring
-            </a>
+            </Link>
           </div>
         </div>
 

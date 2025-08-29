@@ -39,6 +39,12 @@ const Header = () => {
             Browse
           </Link>
           <Link
+            to="/mylibrary"
+            className={isHome ? "text-indigo-600 hover:text-indigo-200" : "text-gray-700 hover:text-indigo-600"}
+          >
+            My Library
+          </Link>
+          <Link
             to="/login"
             className={isHome ? "text-indigo-600 hover:text-indigo-200" : "text-gray-700 hover:text-indigo-600"}
           >
