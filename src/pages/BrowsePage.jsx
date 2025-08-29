@@ -1,5 +1,5 @@
-// src/pages/BrowsePage.jsx
 import { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import BookModal from "../components/BookModal";
 
@@ -15,7 +15,7 @@ function CategoryRow({ title, query, onBookClick }) {
     const fetchBooks = async () => {
       try {
         const response = await fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=subject:${encodeURIComponent(
+          `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
             query
           )}&maxResults=20&printType=books&orderBy=relevance&langRestrict=en`
         );
@@ -129,6 +129,11 @@ export default function BrowsePage() {
   const [loadingSearch, setLoadingSearch] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
 
+  // ✅ Read category from query params
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const category = params.get("category");
+
   // Search functionality
   const fetchSearchResults = async (query) => {
     setLoadingSearch(true);
@@ -216,8 +221,17 @@ export default function BrowsePage() {
           )}
         </div>
       ) : (
-        // Default Categories when not searching
         <div>
+          {/* ✅ If category param exists, show it at the top */}
+          {category && (
+            <CategoryRow
+              title={`${category.charAt(0).toUpperCase() + category.slice(1)} Books`}
+              query={category}
+              onBookClick={setSelectedBook}
+            />
+          )}
+
+          {/* ✅ Preloaded categories (always shown) */}
           <CategoryRow
             title="Classic Books"
             query="classic literature"

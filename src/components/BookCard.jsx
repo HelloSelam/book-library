@@ -7,6 +7,18 @@ function BookCard({ book, onClick }) {
   const author = book.author || "Unknown Author"
   const publisher = book.publisher || "Unknown Publisher"
 
+  const handleAddToLibrary = (e) => {
+    e.stopPropagation() // prevents triggering parent onClick when button is clicked
+    let current = JSON.parse(localStorage.getItem("myLibrary")) || []
+    if (!current.some((item) => item.id === book.id)) {
+      current.push(book)
+      localStorage.setItem("myLibrary", JSON.stringify(current))
+      alert("✅ Book added to your library")
+    } else {
+      alert("⚠️ This book is already in your library")
+    }
+  }
+
   return (
     <div
       onClick={onClick}
