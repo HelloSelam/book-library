@@ -6,20 +6,20 @@ const Hero = () => {
   return (
     <section className="bg-purple-300 px-4 md:px-20 pt-20">
       {/* Hero Card */}
-      <div className="bg-white rounded-3xl shadow-2xl flex flex-col md:flex-row items-center justify-between px-8 md:px-16 py-12">
+      <div className="bg-white rounded-3xl shadow-2xl flex flex-col md:flex-row items-center justify-between px-8 md:px-16 mt-3 py-14">
         
         {/* Left Side */}
-        <div className="max-w-xl text-center md:text-left">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-snug">
+        <div className="mb-10 max-w-xl md:text-left">
+          <h1 className="text-4xl md:text-5xl font-bold font-sans text-gray-900 leading-snug py-0">
             Innovate Your Book Shelf
           </h1>
-          <p className="mt-4 text-lg text-gray-700">
+          <p className="mt-4 text-base font-sans text-gray-700 italic">
             Welcome to your personal digital library. Discover, organize & enjoy
             thousands of books across every genre imaginable.
           </p>
-          <div className="mt-8">
+          <div className="mt-16">
             <Link
-              to="/browse"   // ✅ Navigate to browse page
+              to="/browse"   // Navigate to browse page
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-colors"
             >
               Start Exploring

@@ -1,7 +1,6 @@
-// src/components/BookModal.jsx
 import { useState, useEffect } from "react"
 
-function BookModal({ book, onClose }) {
+function BookModal({ book, onClose, onRemove }) {
   if (!book) return null
 
   const cover = book.cover || "https://via.placeholder.com/150x220?text=No+Cover"
@@ -12,7 +11,6 @@ function BookModal({ book, onClose }) {
   const publishedDate = book.publishedDate || "Unknown"
   const pageCount = book.pageCount || "Unknown"
 
-  // Manage "My Library"
   const [inLibrary, setInLibrary] = useState(false)
 
   useEffect(() => {
@@ -43,7 +41,11 @@ function BookModal({ book, onClose }) {
     stored = stored.filter((item) => item.id !== book.id)
     localStorage.setItem("myLibrary", JSON.stringify(stored))
     setInLibrary(false)
-    onClose() // close modal after removing
+
+    // Notify parent if available
+    if (onRemove) {
+      onRemove(book.id)
+    }
   }
 
   return (

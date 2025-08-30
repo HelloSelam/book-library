@@ -129,7 +129,7 @@ export default function BrowsePage() {
   const [loadingSearch, setLoadingSearch] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
 
-  // ✅ Read category from query params
+  // Read category from query params
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const category = params.get("category");
@@ -176,8 +176,8 @@ export default function BrowsePage() {
   };
 
   return (
-    <div className="min-h-screen bg-purple-200 p-6 pt-24">
-      {/* ✅ added pt-24 so content starts below the fixed header */}
+    <div className="min-h-screen bg-purple-300 mt-3 p-6 pt-24">
+      {/* added pt-24 so content starts below the fixed header */}
 
       {/* Search Bar */}
       <SearchBar onSearch={handleSearch} />
@@ -222,7 +222,7 @@ export default function BrowsePage() {
         </div>
       ) : (
         <div>
-          {/* ✅ If category param exists, show it at the top */}
+          {/* If category param exists, show it at the top */}
           {category && (
             <CategoryRow
               title={`${category.charAt(0).toUpperCase() + category.slice(1)} Books`}
@@ -231,7 +231,7 @@ export default function BrowsePage() {
             />
           )}
 
-          {/* ✅ Preloaded categories (always shown) */}
+          {/* Preloaded categories (always shown) */}
           <CategoryRow
             title="Classic Books"
             query="classic literature"

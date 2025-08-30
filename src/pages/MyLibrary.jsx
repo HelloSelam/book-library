@@ -15,11 +15,10 @@ function MyLibrary() {
     const updated = library.filter((book) => book.id !== id)
     setLibrary(updated)
     localStorage.setItem("myLibrary", JSON.stringify(updated))
-    setSelectedBook(null) // close modal after removing
   }
 
   return (
-    <div className="bg-purple-300 p-20 min-h-screen">
+    <div className="bg-purple-300 mt-6 p-20 min-h-screen">
       <h1 className="text-2xl font-bold mb-6">📚 My Library</h1>
       {library.length === 0 ? (
         <p className="text-gray-600">No books saved yet.</p>
@@ -29,7 +28,7 @@ function MyLibrary() {
             <div
               key={book.id}
               onClick={() => setSelectedBook(book)}
-              className="relative" 
+              className="relative cursor-pointer"
             >
               <BookCard book={book} />
             </div>
@@ -43,7 +42,6 @@ function MyLibrary() {
           book={selectedBook}
           onClose={() => setSelectedBook(null)}
           onRemove={handleRemove}
-          showRemove={true}
         />
       )}
     </div>

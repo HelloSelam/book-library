@@ -6,7 +6,7 @@ const categoriesList = [
   { name: "Fiction", description: "Explore imaginative stories across all genres.", subject: "fiction" },
   { name: "Science", description: "Dive into discoveries, inventions, and the natural world.", subject: "science" },
   { name: "History", description: "Learn from the past, explore events and cultures.", subject: "history" },
-  { name: "Technology", description: "Stay ahead with books on innovation and progress.", subject: "computers" },
+  { name: "Technology", description: "Stay ahead with books on innovation and progress.", subject: "technology" },
 ]
 
 export default function Categories() {
@@ -45,21 +45,21 @@ export default function Categories() {
   }
 
   return (
-    <section className="py-12 bg-purple-300">
+    <section className="py-14 bg-purple-300">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-8">Popular Categories</h2>
+        <h2 className="text-3xl font-bold text-center mt-4 mb-10">Popular Categories</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {categories.map((cat) => (
             <div
               key={cat.name}
               onClick={() => handleCategoryClick(cat)}
-              className="p-6 bg-white shadow-lg rounded-2xl hover:shadow-xl transition cursor-pointer"
+              className="py-14 px-1 bg-white shadow-lg rounded-2xl hover:shadow-xl transition cursor-pointer"
             >
-              <h3 className="text-xl font-semibold mb-2">{cat.name}</h3>
-              <p className="text-gray-600 text-sm mb-3">{cat.description}</p>
-              <p className="text-gray-800 font-medium">
-                {cat.count ? `${cat.count} books` : "Loading..."}
+              <h3 className="text-xl text-center font-semibold font-mono mb-3">{cat.name}</h3>
+              <p className="text-gray-600 text-center text-sm mb-6 px-4">{cat.description}</p>
+              <p className="text-gray-800 text-center font-medium">
+                {cat.count ? `${cat.count}+ books` : "Loading..."}
               </p>
             </div>
           ))}
