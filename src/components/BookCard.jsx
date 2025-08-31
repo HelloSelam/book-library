@@ -1,23 +1,13 @@
 // src/components/BookCard.jsx
+import noCoverImg from "../assets/no_cover.jpeg";
+
 function BookCard({ book, onClick }) {
-  const placeholder = "https://via.placeholder.com/150x220?text=No+Cover"
+  const placeholder = noCoverImg
 
   const cover = book.cover || placeholder
   const title = book.title || "No Title Available"
   const author = book.author || "Unknown Author"
   const publisher = book.publisher || "Unknown Publisher"
-
-  const handleAddToLibrary = (e) => {
-    e.stopPropagation() // prevents triggering parent onClick when button is clicked
-    let current = JSON.parse(localStorage.getItem("myLibrary")) || []
-    if (!current.some((item) => item.id === book.id)) {
-      current.push(book)
-      localStorage.setItem("myLibrary", JSON.stringify(current))
-      alert("✅ Book added to your library")
-    } else {
-      alert("⚠️ This book is already in your library")
-    }
-  }
 
   return (
     <div

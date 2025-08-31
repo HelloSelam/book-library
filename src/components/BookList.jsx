@@ -1,4 +1,5 @@
 // src/components/BookList.jsx
+/*
 import React from "react"
 import BookCard from "./BookCard"
 
@@ -17,3 +18,4 @@ const BookList = ({ books, onBookClick }) => {
 }
 
 export default BookList
+*/

@@ -2,8 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import BookModal from "../components/BookModal";
+import noCoverImg from "../assets/no_cover.jpeg"; // Local fallback cover image
 
-// --- CategoryRow Component with hover arrows & placeholder covers ---
+/**
+ * CategoryRow component
+ * Displays a horizontal scrollable row of books for a given category
+ */
 function CategoryRow({ title, query, onBookClick }) {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,22 +24,19 @@ function CategoryRow({ title, query, onBookClick }) {
           )}&maxResults=20&printType=books&orderBy=relevance&langRestrict=en`
         );
         const data = await response.json();
+
         const booksData =
           data.items?.map((item) => ({
             id: item.id,
             title: item.volumeInfo.title || "No Title Available",
-            author: item.volumeInfo.authors
-              ? item.volumeInfo.authors[0]
-              : "Unknown Author",
+            author: item.volumeInfo.authors?.[0] || "Unknown Author",
             publisher: item.volumeInfo.publisher || "Unknown Publisher",
-            cover:
-              item.volumeInfo.imageLinks?.thumbnail ||
-              "/no-cover.png" ||
-              "https://via.placeholder.com/128x192?text=No+Cover",
+            cover: item.volumeInfo.imageLinks?.thumbnail || noCoverImg,
             description: item.volumeInfo.description || "",
             publishedDate: item.volumeInfo.publishedDate || "",
             pageCount: item.volumeInfo.pageCount || "",
           })) || [];
+
         setBooks(booksData);
       } catch (err) {
         console.error("Error fetching category:", title, err);
@@ -93,7 +94,7 @@ function CategoryRow({ title, query, onBookClick }) {
                   alt={book.title}
                   className="w-full h-40 sm:h-44 md:h-48 object-cover rounded-lg shadow"
                   onError={(e) => {
-                    e.target.src = "/no-cover.png";
+                    e.currentTarget.src = noCoverImg;
                   }}
                 />
                 <h3 className="mt-2 text-xs sm:text-sm font-semibold truncate">
@@ -123,6 +124,10 @@ function CategoryRow({ title, query, onBookClick }) {
   );
 }
 
+/**
+ * BrowsePage
+ * Handles search functionality, category browsing, and modal display
+ */
 export default function BrowsePage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -144,22 +149,19 @@ export default function BrowsePage() {
         )}&maxResults=24&printType=books&orderBy=relevance&langRestrict=en`
       );
       const data = await response.json();
+
       const results =
         data.items?.map((item) => ({
           id: item.id,
           title: item.volumeInfo.title || "No Title Available",
-          author: item.volumeInfo.authors
-            ? item.volumeInfo.authors[0]
-            : "Unknown Author",
+          author: item.volumeInfo.authors?.[0] || "Unknown Author",
           publisher: item.volumeInfo.publisher || "Unknown Publisher",
-          cover:
-            item.volumeInfo.imageLinks?.thumbnail ||
-            "/no-cover.png" ||
-            "https://via.placeholder.com/128x192?text=No+Cover",
+          cover: item.volumeInfo.imageLinks?.thumbnail || noCoverImg,
           description: item.volumeInfo.description || "",
           publishedDate: item.volumeInfo.publishedDate || "",
           pageCount: item.volumeInfo.pageCount || "",
         })) || [];
+
       setSearchResults(results);
     } catch (err) {
       console.error("Error fetching search:", err);
@@ -177,18 +179,19 @@ export default function BrowsePage() {
 
   return (
     <div className="min-h-screen bg-purple-300 mt-3 p-6 pt-24">
-      {/* added pt-24 so content starts below the fixed header */}
+      {/* Added pt-24 so content starts below the fixed header */}
 
       {/* Search Bar */}
       <SearchBar onSearch={handleSearch} />
 
-      {/* Search Results */}
+      {/* Search Results Section */}
       {searchTerm ? (
         <div>
           <h2 className="text-2xl font-bold mt-6 mb-4">
             Search Results for:{" "}
             <span className="text-blue-600">{searchTerm}</span>
           </h2>
+
           {loadingSearch ? (
             <p>Loading...</p>
           ) : searchResults.length > 0 ? (
@@ -204,15 +207,13 @@ export default function BrowsePage() {
                     alt={book.title}
                     className="w-full h-44 sm:h-48 object-cover rounded shadow"
                     onError={(e) => {
-                      e.target.src = "/no-cover.png";
+                      e.currentTarget.src = noCoverImg;
                     }}
                   />
                   <h3 className="mt-2 text-sm font-semibold truncate">
                     {book.title}
                   </h3>
-                  <p className="text-xs text-gray-600 truncate">
-                    {book.author}
-                  </p>
+                  <p className="text-xs text-gray-600 truncate">{book.author}</p>
                 </div>
               ))}
             </div>
@@ -231,27 +232,11 @@ export default function BrowsePage() {
             />
           )}
 
-          {/* Preloaded categories (always shown) */}
-          <CategoryRow
-            title="Classic Books"
-            query="classic literature"
-            onBookClick={setSelectedBook}
-          />
-          <CategoryRow
-            title="Romance"
-            query="romance"
-            onBookClick={setSelectedBook}
-          />
-          <CategoryRow
-            title="Kids"
-            query="children"
-            onBookClick={setSelectedBook}
-          />
-          <CategoryRow
-            title="Thrillers"
-            query="thriller"
-            onBookClick={setSelectedBook}
-          />
+          {/* Preloaded categories */}
+          <CategoryRow title="Classic Books" query="classic literature" onBookClick={setSelectedBook} />
+          <CategoryRow title="Romance" query="romance" onBookClick={setSelectedBook} />
+          <CategoryRow title="Kids" query="children" onBookClick={setSelectedBook} />
+          <CategoryRow title="Thrillers" query="thriller" onBookClick={setSelectedBook} />
         </div>
       )}
 

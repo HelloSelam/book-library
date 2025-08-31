@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react"
+import noCoverImg from "../assets/no_cover.jpeg";
 
 function BookModal({ book, onClose, onRemove }) {
   if (!book) return null
 
-  const cover = book.cover || "https://via.placeholder.com/150x220?text=No+Cover"
+  const cover = book.cover || noCoverImg
   const title = book.title || "No Title Available"
   const author = book.author || "Unknown Author"
   const publisher = book.publisher || "Unknown Publisher"
