@@ -30,23 +30,27 @@ A responsive web application built with **React** that allows users to search, b
 
 ---
 
+## **Project Structure**
+
 src/
 │
 ├─ assets/           # Images 
 ├─ components/       # Reusable React components
-│   ├─ BookCard.jsx
-│   ├─ BookModal.jsx
-│   ├─ Categories.jsx
-│   ├─ Header.jsx
+|   ├─ BookCard.jsx
+|   ├─ BookModal.jsx
+|   ├─ Categories.jsx
+|   ├─ Header.jsx
 |   ├─ Hero.jsx
 |   ├─ SearchBar.jsx
 |   └─ WhyChooseNovare.jsx
 ├─ pages/
-│   ├─ BrowsePage.jsx
+|   ├─ BrowsePage.jsx
 |   ├─ LandingPage.jsx
 |   └─ MyLibrary.jsx
 ├─ App.jsx
 └─ main.jsx
+
+---
 
 ## **Notes**
 
@@ -61,4 +65,3 @@ src/
 **Selamawit Yeruk**  
 - Front-End & Back-End Developer (ALX Programs)  
 - Passionate about building clean, responsive web apps  
-
