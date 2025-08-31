@@ -34,21 +34,21 @@ A responsive web application built with **React** that allows users to search, b
 
 src/
 │
-├─ assets/           # Images 
+├─ assets/           # Images and other static assets
 ├─ components/       # Reusable React components
-|   ├─ BookCard.jsx
-|   ├─ BookModal.jsx
-|   ├─ Categories.jsx
-|   ├─ Header.jsx
-|   ├─ Hero.jsx
-|   ├─ SearchBar.jsx
-|   └─ WhyChooseNovare.jsx
-├─ pages/
-|   ├─ BrowsePage.jsx
-|   ├─ LandingPage.jsx
-|   └─ MyLibrary.jsx
-├─ App.jsx
-└─ main.jsx
+│   ├─ BookCard.jsx
+│   ├─ BookModal.jsx
+│   ├─ Categories.jsx
+│   ├─ Header.jsx
+│   ├─ Hero.jsx
+│   ├─ SearchBar.jsx
+│   └─ WhyChooseNovare.jsx
+├─ pages/            # Page-level components / routes
+│   ├─ BrowsePage.jsx
+│   ├─ LandingPage.jsx
+│   └─ MyLibrary.jsx
+├─ App.jsx           # Main App component
+└─ main.jsx          # Entry point
 
 ---
 
