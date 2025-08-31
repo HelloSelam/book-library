@@ -50,6 +50,7 @@ src/
 │   └─ MyLibrary.jsx
 ├─ App.jsx           # Main App component
 └─ main.jsx          # Entry point
+```
 
 ---
 
