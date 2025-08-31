@@ -32,6 +32,7 @@ A responsive web application built with **React** that allows users to search, b
 
 ## **Project Structure**
 
+```text
 src/
 │
 ├─ assets/           # Images and other static assets
